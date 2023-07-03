@@ -22,6 +22,23 @@ ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'place-yo
 
 FLUSH PRIVILEGES;
 
+CREATE USER 'new_user'@'%' IDENTIFIED BY 'password';
+GRANT ALL PRIVILEGES ON *.* TO 'new_user'@'%' WITH GRANT OPTION;
+
+FLUSH PRIVILEGES;
+Instead, just go to /etc/mysql/mysql.conf.d/
+
+There, you should find a file named mysqld.cnf
+
+Here, you will find
+
+bind-address = 127.0.0.1
+Change it to
+
+bind-address = 0.0.0.0 <OR> <Your IP>
+THAT'S IT!!!. SAVE THE FILE AND RESTART MYSQL.
+
+
 ## Step 6: Test the MySql server if it is working by running sample sql queries
 
 CREATE DATABASE mysql_test;
